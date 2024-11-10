@@ -15,16 +15,8 @@ class Komik:
     def main(self):
         response = self.add_requests()
         #soup = response.find("section",{"class":"whites"}) if "latest" in self.search else response.find("div",{"class":"arch-list"})
-        komik = []
-        for item in response.find_all("div",{"class":"animepost"}):
-            data = self.latest(item) if "latest" in self.search else self.searching(item)
-            komik.append(data)
-        data = {"komik":komik}
-        if response.find("div",{"class":"pagination"}).find("a",{"class":"next page-numbers"}):
-            data.update({"nextPage": True})
-        else:
-            data.update({"nextPage":False})
-        return data
+        
+        return response
         
     def latest(self,item):
         title = item.find("h4").text
