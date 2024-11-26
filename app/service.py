@@ -17,7 +17,7 @@ class Komik:
         for item in response.find_all("div",{"class":"utao"}):
             title = item.find("h4").text.strip()
             slug = item.find("a",{"class":"series"}).get("href").split("/")[4]
-            cover = item.find("img").get("src").split(".jpg?")[0]
+            cover = item.find("img").get("src").split(".jpg?")[0]+".jpg"
             type = "Manhwa" if item.find("ul",{"class":"Manhwa"}) else ("Manhua" if item.find("ul",{"class":"Manhua"}) else "Manga")
             chapter = item.find("ul",{"class": f"{type}"}).find_all("li")[0].find("a").text.replace("Ch.","")
             time = item.find("ul",{"class": f"{type}"}).find_all("li")[0].find("span").text
@@ -30,7 +30,7 @@ class Komik:
         for item in response.find_all("div",{"class":"bs"}):
             title = item.find("div",{"class":"tt"}).text.strip()
             slug = item.find("a").get("href").split("/")[4]
-            cover = item.find("img").get("src").split(".jpg?")[0]
+            cover = item.find("img").get("src").split(".jpg?")[0]+".jpg"
             type = "Manhwa" if item.find("span",{"class":"type Manhwa"}) else ("Manhua" if item.find("span",{"class":"type Manhua"}) else "Manga")
             chapter = item.find("a",{"class": "epxs"}).text.replace("Chapter","")
             komik.append({"title":title, "slug":slug, "cover":cover, "type":type, "chapter":chapter})
